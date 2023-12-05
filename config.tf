@@ -4,10 +4,6 @@ terraform {
       source  = "dmacvicar/libvirt"
       version = "~> 0.7.1"
     }
-    ct = {
-      source  = "poseidon/ct"
-      version = "0.7.1"
-    }
     tls = {
       source  = "hashicorp/tls"
       version = "4.0.4"

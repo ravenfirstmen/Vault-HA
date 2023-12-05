@@ -1,22 +1,9 @@
-resource "libvirt_network" "zone1_cluster_network" {
+resource "libvirt_network" "cluster_network" {
   name   = "zone1.${var.network_domain}"
   mode   = "nat"
   domain = var.network_domain
 
-  addresses = [var.network_zone1_cidr]
-
-  dns {
-    enabled    = true
-    local_only = true
-  }
-}
-
-resource "libvirt_network" "zone2_cluster_network" {
-  name   = "zone2.${var.network_domain}"
-  mode   = "nat"
-  domain = var.network_domain
-
-  addresses = [var.network_zone2_cidr]
+  addresses = [var.network_cidr]
 
   dns {
     enabled    = true
@@ -25,8 +12,7 @@ resource "libvirt_network" "zone2_cluster_network" {
 }
 
 locals {
-  zone1_network_gateway = cidrhost(var.network_zone1_cidr, 1) # por omissão em NAT a gateway 1º IP
-  zone2_network_gateway = cidrhost(var.network_zone2_cidr, 1) # por omissão em NAT a gateway 1º IP
+  network_gateway = cidrhost(var.network_cidr, 1) # por omissão em NAT a gateway 1º IP
 }
 
 data "template_file" "etc_hosts" {

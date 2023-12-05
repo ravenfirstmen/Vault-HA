@@ -57,21 +57,6 @@ write_files:
     path: /home/ubuntu/unseal.sh
     owner: ubuntu:ubuntu
     permissions: '0700'    
-  - encoding: b64
-    content: ${base64encode(templatefile("${path.module}/cloud-init/vault/migrate.hcl", {postgres = local.postgres.fqdn, cockroach = local.first_cockroach_server.fqdn }))}
-    path: /home/ubuntu/migrate.hcl
-    owner: ubuntu:ubuntu
-    permissions: '0600'    
-  - encoding: b64
-    content: ${base64encode(templatefile("${path.module}/cloud-init/vault/switch.sh", {postgres = local.postgres.fqdn, cockroach = local.first_cockroach_server.fqdn }))}
-    path: /home/ubuntu/switch.sh
-    owner: ubuntu:ubuntu
-    permissions: '0700'    
-  - encoding: b64
-    content: ${base64encode(file("${path.module}/cloud-init/vault/start-vault-and-unseal.sh"))}
-    path: /home/ubuntu/start-vault-and-unseal.sh
-    owner: ubuntu:ubuntu
-    permissions: '0700'    
 EOT
   }
 
